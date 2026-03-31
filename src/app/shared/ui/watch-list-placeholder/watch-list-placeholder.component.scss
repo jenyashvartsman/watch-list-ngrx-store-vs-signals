@@ -1,0 +1,112 @@
+.watch-list-placeholder {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(17rem, 1fr);
+  gap: var(--space-5);
+
+  &__panel {
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    background:
+      linear-gradient(180deg, rgb(11 21 37 / 92%), rgb(8 16 29 / 82%)),
+      linear-gradient(135deg, rgb(126 200 255 / 6%), rgb(255 209 102 / 5%));
+    box-shadow: var(--shadow-lg);
+  }
+
+  &__panel--secondary {
+    align-self: stretch;
+  }
+
+  &__eyebrow {
+    margin: 0 0 var(--space-3);
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  &__title,
+  &__subtitle {
+    margin: 0;
+    color: var(--color-text-strong);
+  }
+
+  &__title {
+    font-family: var(--font-family-display);
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    line-height: 1;
+  }
+
+  &__subtitle {
+    font-size: 1.1rem;
+  }
+
+  &__description {
+    margin: var(--space-4) 0 0;
+    max-width: 34rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+  }
+
+  &__chip {
+    padding: 0.7rem 0.95rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    color: var(--color-text);
+    background: rgb(255 255 255 / 3%);
+  }
+
+  &__stats {
+    display: grid;
+    gap: var(--space-4);
+    margin: var(--space-5) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__stat {
+    display: grid;
+    gap: 0.25rem;
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+
+    &:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+  }
+
+  &__stat-label {
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  &__stat-value {
+    color: var(--color-text-strong);
+    font-size: 1.1rem;
+  }
+
+  &--movies &__title {
+    color: var(--color-movies);
+  }
+
+  &--tv &__title {
+    color: var(--color-tv);
+  }
+}
+
+@media (width <= 56rem) {
+  .watch-list-placeholder {
+    grid-template-columns: 1fr;
+  }
+}

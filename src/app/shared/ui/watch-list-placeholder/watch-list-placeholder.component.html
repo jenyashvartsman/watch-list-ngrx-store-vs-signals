@@ -1,0 +1,30 @@
+<section
+  class="watch-list-placeholder"
+  [class.watch-list-placeholder--movies]="accent() === 'movies'"
+  [class.watch-list-placeholder--tv]="accent() === 'tv'"
+  aria-labelledby="watch-list-placeholder-title"
+>
+  <div class="watch-list-placeholder__panel">
+    <p class="watch-list-placeholder__eyebrow">Feature placeholder</p>
+    <h2 class="watch-list-placeholder__title" id="watch-list-placeholder-title">{{ title() }}</h2>
+    <p class="watch-list-placeholder__description">{{ description() }}</p>
+
+    <div class="watch-list-placeholder__actions" aria-label="Planned sections">
+      <span class="watch-list-placeholder__chip">Search</span>
+      <span class="watch-list-placeholder__chip">Saved list</span>
+      <span class="watch-list-placeholder__chip">State comparison</span>
+    </div>
+  </div>
+
+  <aside class="watch-list-placeholder__panel watch-list-placeholder__panel--secondary">
+    <h3 class="watch-list-placeholder__subtitle">Ready for the next pass</h3>
+    <ul class="watch-list-placeholder__stats">
+      @for (stat of stats(); track stat.label) {
+        <li class="watch-list-placeholder__stat">
+          <span class="watch-list-placeholder__stat-label">{{ stat.label }}</span>
+          <strong class="watch-list-placeholder__stat-value">{{ stat.value }}</strong>
+        </li>
+      }
+    </ul>
+  </aside>
+</section>

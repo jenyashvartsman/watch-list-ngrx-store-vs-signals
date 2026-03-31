@@ -9,7 +9,7 @@ Generate initial layout for the application. The app will store to separate watc
 
 # Requirements
 
-- Modern theme and layout.
+- Modern theme and layout, with relevant scss files.
 - Header should have a navigation between movies and tv, movies is the default one
 - Create a feature placeholder for each feature but don't implement yet.
 - Do responsive design

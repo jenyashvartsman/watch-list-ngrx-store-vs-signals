@@ -1,0 +1,132 @@
+.app-layout {
+  position: relative;
+  min-height: 100dvh;
+  overflow: hidden;
+  padding: var(--space-6);
+
+  &__aurora {
+    position: absolute;
+    z-index: 0;
+    border-radius: 999px;
+    filter: blur(1rem);
+    pointer-events: none;
+
+    &--movies {
+      inset: 3rem auto auto -8rem;
+      width: 20rem;
+      height: 20rem;
+      background: radial-gradient(circle, rgb(141 217 255 / 40%), transparent 68%);
+    }
+
+    &--tv {
+      inset: auto -8rem 10rem auto;
+      width: 24rem;
+      height: 24rem;
+      background: radial-gradient(circle, rgb(255 184 107 / 26%), transparent 68%);
+    }
+  }
+
+  &__header,
+  &__main {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    max-width: 75rem;
+    margin: 0 auto;
+    padding: var(--space-4) var(--space-5);
+    border: 1px solid var(--color-border);
+    border-radius: calc(var(--radius-xl) + 0.25rem);
+    background: linear-gradient(180deg, rgb(8 18 33 / 88%), rgb(8 18 33 / 68%));
+    backdrop-filter: blur(20px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  &__brand {
+    display: grid;
+    gap: 0.125rem;
+    text-decoration: none;
+  }
+
+  &__eyebrow {
+    color: var(--color-accent);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    font-family: var(--font-family-display);
+    font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+    color: var(--color-text-strong);
+  }
+
+  &__nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  &__nav-link {
+    padding: 0.75rem 1rem;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition:
+      border-color 150ms ease,
+      color 150ms ease,
+      background-color 150ms ease,
+      transform 150ms ease;
+
+    &:hover,
+    &:focus-visible {
+      border-color: var(--color-border-strong);
+      color: var(--color-text-strong);
+      background: rgb(126 200 255 / 10%);
+      outline: none;
+      transform: translateY(-1px);
+    }
+
+    &--active {
+      border-color: rgb(255 209 102 / 35%);
+      color: var(--color-text-strong);
+      background: linear-gradient(135deg, rgb(255 209 102 / 18%), rgb(126 200 255 / 12%));
+    }
+  }
+
+  &__main {
+    max-width: 75rem;
+    margin: 0 auto;
+    padding: clamp(2rem, 5vw, 4rem) 0;
+  }
+}
+
+@media (width <= 48rem) {
+  .app-layout {
+    padding: var(--space-4);
+
+    &__header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    &__main {
+    }
+
+    &__nav {
+      width: 100%;
+    }
+
+    &__nav-link {
+      flex: 1 1 10rem;
+      text-align: center;
+    }
+  }
+}

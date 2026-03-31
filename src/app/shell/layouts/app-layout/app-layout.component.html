@@ -1,0 +1,29 @@
+<div class="app-layout">
+  <div class="app-layout__aurora app-layout__aurora--movies" aria-hidden="true"></div>
+  <div class="app-layout__aurora app-layout__aurora--tv" aria-hidden="true"></div>
+
+  <header class="app-layout__header">
+    <a class="app-layout__brand" routerLink="/movies">
+      <span class="app-layout__eyebrow">Watch list lab</span>
+      <span class="app-layout__title">Movies vs TV</span>
+    </a>
+
+    <nav class="app-layout__nav" aria-label="Primary">
+      <a
+        class="app-layout__nav-link"
+        routerLink="/movies"
+        routerLinkActive="app-layout__nav-link--active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        Movies
+      </a>
+      <a class="app-layout__nav-link" routerLink="/tv" routerLinkActive="app-layout__nav-link--active">
+        TV
+      </a>
+    </nav>
+  </header>
+
+  <main class="app-layout__main">
+    <router-outlet />
+  </main>
+</div>
