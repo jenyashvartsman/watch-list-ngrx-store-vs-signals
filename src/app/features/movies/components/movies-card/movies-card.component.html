@@ -1,0 +1,28 @@
+<article class="movies-card">
+  <div class="movies-card__poster">
+    <img
+      class="movies-card__image"
+      [src]="movie().thumbnailUrl"
+      [alt]="movie().title"
+      loading="lazy"
+    />
+    <span class="movies-card__genre">{{ movie().genre }}</span>
+  </div>
+
+  <div class="movies-card__body">
+    <h3 class="movies-card__title">{{ movie().title }}</h3>
+
+    <div
+      class="movies-card__rating"
+      [class.movies-card__rating--unrated]="movie().rating === undefined"
+    >
+      @if (movie().rating !== undefined) {
+        <span class="movies-card__rating-star" aria-hidden="true">★</span>
+        <span class="movies-card__rating-value">{{ movie().rating }}</span>
+        <span class="movies-card__rating-scale">/10</span>
+      } @else {
+        <span class="movies-card__rating-empty">Not rated</span>
+      }
+    </div>
+  </div>
+</article>

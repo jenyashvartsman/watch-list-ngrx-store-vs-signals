@@ -1,0 +1,16 @@
+<form class="movies-filter" (submit)="$event.preventDefault()">
+  <ui-text-input
+    label="Search"
+    type="search"
+    placeholder="Search by title…"
+    [value]="filters().title"
+    (valueChange)="onTitleChange($event)"
+  />
+  <ui-select
+    label="Genre"
+    allOptionLabel="All genres"
+    [value]="filters().genre"
+    [options]="genres"
+    (valueChange)="onGenreChange($event)"
+  />
+</form>

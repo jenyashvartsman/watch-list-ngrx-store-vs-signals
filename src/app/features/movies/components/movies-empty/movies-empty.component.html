@@ -1,0 +1,11 @@
+<div class="movies-empty" role="status">
+  <div class="movies-empty__icon" aria-hidden="true">🎬</div>
+
+  @if (filtersApplied()) {
+    <h3 class="movies-empty__title">No movies match your filters</h3>
+    <p class="movies-empty__description">Try adjusting your search or selecting a different genre.</p>
+  } @else {
+    <h3 class="movies-empty__title">Your watch list is empty</h3>
+    <p class="movies-empty__description">Start building your list by adding movies you want to watch.</p>
+  }
+</div>

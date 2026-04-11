@@ -1,0 +1,11 @@
+<div class="text-input">
+  <label class="text-input__label" [for]="id">{{ label() }}</label>
+  <input
+    class="text-input__control"
+    [id]="id"
+    [type]="type()"
+    [value]="value()"
+    [placeholder]="placeholder()"
+    (input)="onInput($event)"
+  />
+</div>

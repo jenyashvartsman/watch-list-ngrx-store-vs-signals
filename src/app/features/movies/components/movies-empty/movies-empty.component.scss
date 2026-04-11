@@ -1,0 +1,28 @@
+.movies-empty {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-3);
+  padding: var(--space-10) var(--space-4);
+  text-align: center;
+
+  &__icon {
+    font-size: 3.5rem;
+    line-height: 1;
+    opacity: 0.6;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text-strong);
+  }
+
+  &__description {
+    margin: 0;
+    max-inline-size: 28rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    font-size: 0.9rem;
+  }
+}

@@ -1,10 +1,25 @@
-<app-watch-list-placeholder
-  title="Movies watch list"
-  description="Track the films you want to revisit, compare state approaches, and shape the movie workflow next."
-  accent="movies"
-  [stats]="[
-    { label: 'Default route', value: 'Yes' },
-    { label: 'Focus', value: 'Watch candidates' },
-    { label: 'Status', value: 'Placeholder ready' },
-  ]"
-/>
+<div class="movies-page">
+  <header class="movies-page__header">
+    <h1 class="movies-page__title">Movies</h1>
+    <app-movies-filter
+      [filters]="moviesStore.filters()"
+      (filtersChange)="onFiltersChange($event)"
+    />
+  </header>
+
+  <main class="movies-page__content">
+    @if (moviesStore.isLoading()) {
+      <div class="movies-page__loading" aria-live="polite" aria-busy="true">
+        <div class="movies-page__spinner" aria-hidden="true"></div>
+        <p>Loading movies…</p>
+      </div>
+    } @else if (moviesStore.error()) {
+      <app-movies-error [message]="moviesStore.error()!" />
+    } @else {
+      <app-movies-grid
+        [movies]="moviesStore.filteredMovies()"
+        [filtersApplied]="moviesStore.hasActiveFilters()"
+      />
+    }
+  </main>
+</div>

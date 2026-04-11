@@ -1,0 +1,13 @@
+<section class="movies-grid">
+  @if (movies().length === 0) {
+    <app-movies-empty [filtersApplied]="filtersApplied()" />
+  } @else {
+    <ul class="movies-grid__list">
+      @for (movie of movies(); track movie.id) {
+        <li class="movies-grid__item">
+          <app-movies-card [movie]="movie" />
+        </li>
+      }
+    </ul>
+  }
+</section>

@@ -2,10 +2,16 @@ import { computed, inject } from '@angular/core';
 import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
 import { finalize, firstValueFrom } from 'rxjs';
 import { MoviesApiService } from '../data-access/api/movies-api.service';
-import { CreateMovieDto, MovieDto } from '../data-access/dto/movie.dto';
+import { CreateMovieDto, MovieDto, MovieGenre } from '../data-access/dto/movie.dto';
+
+export type MoviesFilters = {
+  title: string;
+  genre: MovieGenre | '';
+};
 
 type MoviesState = {
   movies: MovieDto[];
+  filters: MoviesFilters;
   isLoading: boolean;
   isSaving: boolean;
   error: string | null;
@@ -13,6 +19,7 @@ type MoviesState = {
 
 const initialState: MoviesState = {
   movies: [],
+  filters: { title: '', genre: '' },
   isLoading: false,
   isSaving: false,
   error: null,
@@ -21,10 +28,25 @@ const initialState: MoviesState = {
 export const MoviesStore = signalStore(
   { providedIn: 'root' },
   withState(initialState),
-  withComputed((store) => ({
-    hasMovies: computed(() => store.movies().length > 0),
-    emptyStateVisible: computed(() => !store.isLoading() && store.movies().length === 0 && !store.error()),
-  })),
+  withComputed((store) => {
+    const filteredMovies = computed(() => {
+      const { title, genre } = store.filters();
+      return store.movies().filter((m) => {
+        const matchesTitle = !title || m.title.toLowerCase().includes(title.toLowerCase());
+        const matchesGenre = !genre || m.genre === genre;
+        return matchesTitle && matchesGenre;
+      });
+    });
+
+    return {
+      filteredMovies,
+      hasMovies: computed(() => store.movies().length > 0),
+      hasActiveFilters: computed(() => !!store.filters().title || !!store.filters().genre),
+      emptyStateVisible: computed(
+        () => !store.isLoading() && filteredMovies().length === 0 && !store.error()
+      ),
+    };
+  }),
   withMethods((store, moviesApi = inject(MoviesApiService)) => ({
     loadMovies(): void {
       patchState(store, { isLoading: true, error: null });
@@ -36,6 +58,10 @@ export const MoviesStore = signalStore(
           next: (movies) => patchState(store, { movies }),
           error: () => patchState(store, { error: 'Failed to load movies.' }),
         });
+    },
+
+    updateFilters(filters: Partial<MoviesFilters>): void {
+      patchState(store, { filters: { ...store.filters(), ...filters } });
     },
 
     async addMovie(payload: CreateMovieDto): Promise<void> {

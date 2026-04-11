@@ -1,0 +1,16 @@
+<div class="ui-select">
+  <label class="ui-select__label" [for]="id">{{ label() }}</label>
+  <select
+    class="ui-select__control"
+    [id]="id"
+    [value]="value()"
+    (change)="onChange($event)"
+  >
+    @if (allOptionLabel()) {
+      <option value="">{{ allOptionLabel() }}</option>
+    }
+    @for (option of options(); track option.value) {
+      <option [value]="option.value">{{ option.label }}</option>
+    }
+  </select>
+</div>
