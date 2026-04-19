@@ -1,91 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { CreateTvShowDto, TvShowDto, TvShowGenre, TvShowStatus } from '../dto/tv-show.dto';
+import { SEED_SHOWS } from '../../../../initial-data/tv-shows.initial-data';
 
 const STORAGE_KEY = 'tv-shows';
-
-const SEED_SHOWS: TvShowDto[] = [
-  {
-    id: 'tv-1',
-    title: 'Breaking Bad',
-    genre: 'crime',
-    thumbnailUrl: 'https://picsum.photos/seed/breaking-bad/400/225',
-    status: 'completed',
-    rating: 10,
-  },
-  {
-    id: 'tv-2',
-    title: 'Stranger Things',
-    genre: 'sci-fi',
-    thumbnailUrl: 'https://picsum.photos/seed/stranger-things/400/225',
-    status: 'watching',
-    rating: 8,
-  },
-  {
-    id: 'tv-3',
-    title: 'The Wire',
-    genre: 'crime',
-    thumbnailUrl: 'https://picsum.photos/seed/the-wire/400/225',
-    status: 'plan-to-watch',
-    rating: undefined,
-  },
-  {
-    id: 'tv-4',
-    title: 'Fleabag',
-    genre: 'comedy',
-    thumbnailUrl: 'https://picsum.photos/seed/fleabag/400/225',
-    status: 'completed',
-    rating: 10,
-  },
-  {
-    id: 'tv-5',
-    title: 'Dark',
-    genre: 'sci-fi',
-    thumbnailUrl: 'https://picsum.photos/seed/dark-series/400/225',
-    status: 'completed',
-    rating: 9,
-  },
-  {
-    id: 'tv-6',
-    title: 'Chernobyl',
-    genre: 'drama',
-    thumbnailUrl: 'https://picsum.photos/seed/chernobyl/400/225',
-    status: 'completed',
-    rating: 9,
-  },
-  {
-    id: 'tv-7',
-    title: 'Sherlock',
-    genre: 'thriller',
-    thumbnailUrl: 'https://picsum.photos/seed/sherlock/400/225',
-    status: 'completed',
-    rating: 8,
-  },
-  {
-    id: 'tv-8',
-    title: 'Mindhunter',
-    genre: 'crime',
-    thumbnailUrl: 'https://picsum.photos/seed/mindhunter/400/225',
-    status: 'plan-to-watch',
-    rating: undefined,
-  },
-  {
-    id: 'tv-9',
-    title: 'Planet Earth',
-    genre: 'documentary',
-    thumbnailUrl: 'https://picsum.photos/seed/planet-earth/400/225',
-    status: 'watching',
-    rating: 9,
-  },
-  {
-    id: 'tv-10',
-    title: 'Attack on Titan',
-    genre: 'anime',
-    thumbnailUrl: 'https://picsum.photos/seed/attack-on-titan/400/225',
-    status: 'watching',
-    rating: 9,
-  },
-];
 
 @Injectable({ providedIn: 'root' })
 export class TvShowsApiService {
