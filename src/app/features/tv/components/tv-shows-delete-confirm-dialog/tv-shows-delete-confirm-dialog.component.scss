@@ -1,0 +1,64 @@
+:host {
+  --ui-accent: var(--color-error, #e05252);
+}
+
+.tv-shows-delete-confirm-dialog {
+  &__body {
+    padding-block: var(--space-2);
+  }
+
+  &__message {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--color-text);
+    line-height: 1.5;
+  }
+
+  &__show-title {
+    color: var(--color-text-strong);
+  }
+
+  &__footer {
+    display: flex;
+    gap: var(--space-3);
+    justify-content: flex-end;
+  }
+
+  &__btn {
+    padding: 0.5rem var(--space-5);
+    border-radius: var(--radius-lg);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition:
+      background 0.15s,
+      color 0.15s,
+      filter 0.15s;
+
+    &--cancel {
+      background: transparent;
+      border-color: var(--color-border);
+      color: var(--color-text-muted);
+
+      &:hover {
+        background: var(--color-border);
+        color: var(--color-text-strong);
+      }
+    }
+
+    &--delete {
+      background: var(--color-error, #e05252);
+      color: #fff;
+
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      &:not(:disabled):hover {
+        filter: brightness(1.1);
+      }
+    }
+  }
+}

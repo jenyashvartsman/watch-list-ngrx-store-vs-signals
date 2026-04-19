@@ -1,0 +1,54 @@
+<ui-dialog title="Rate Show" [isOpen]="show() !== null" (closed)="onClose()">
+  @if (show(); as s) {
+    <div class="tv-shows-rate-dialog__body">
+      <p class="tv-shows-rate-dialog__show-title">{{ s.title }}</p>
+
+      <div class="tv-shows-rate-dialog__score">
+        @if (displayRating() > 0) {
+          <span class="tv-shows-rate-dialog__score-value">{{ displayRating() }}</span>
+          <span class="tv-shows-rate-dialog__score-scale">/10</span>
+        } @else {
+          <span class="tv-shows-rate-dialog__score-empty">Pick a rating</span>
+        }
+      </div>
+
+      <div
+        class="tv-shows-rate-dialog__stars"
+        role="group"
+        aria-label="Rating"
+        (mouseleave)="onStarsLeave()"
+      >
+        @for (n of stars; track n) {
+          <button
+            class="tv-shows-rate-dialog__star"
+            [class.tv-shows-rate-dialog__star--active]="n <= displayRating()"
+            type="button"
+            [attr.aria-label]="'Rate ' + n + ' out of 10'"
+            [attr.aria-pressed]="n === selectedRating()"
+            (mouseenter)="onStarHover(n)"
+            (click)="onStarClick(n)"
+          >★</button>
+        }
+      </div>
+    </div>
+
+    <footer class="tv-shows-rate-dialog__footer">
+      <button
+        class="tv-shows-rate-dialog__btn tv-shows-rate-dialog__btn--cancel"
+        type="button"
+        (click)="onClose()"
+      >
+        Cancel
+      </button>
+      <button
+        class="tv-shows-rate-dialog__btn tv-shows-rate-dialog__btn--submit"
+        type="button"
+        [disabled]="isSaving() || selectedRating() === 0"
+        [attr.aria-busy]="isSaving()"
+        (click)="onSubmit()"
+      >
+        @if (isSaving()) { Saving… } @else { Save Rating }
+      </button>
+    </footer>
+  }
+</ui-dialog>

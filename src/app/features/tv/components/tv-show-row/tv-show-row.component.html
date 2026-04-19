@@ -1,0 +1,57 @@
+<div class="tv-show-row">
+  <div class="tv-show-row__thumbnail">
+    <img
+      class="tv-show-row__image"
+      [src]="show().thumbnailUrl"
+      [alt]="show().title"
+      loading="lazy"
+    />
+  </div>
+
+  <div class="tv-show-row__info">
+    <h3 class="tv-show-row__title">{{ show().title }}</h3>
+    <span class="tv-show-row__genre">{{ show().genre }}</span>
+  </div>
+
+  <div class="tv-show-row__status">
+    <select
+      class="tv-show-row__status-select tv-show-row__status-select--{{ show().status }}"
+      [value]="show().status"
+      [attr.aria-label]="'Status for ' + show().title"
+      (change)="onStatusChange($event)"
+    >
+      @for (s of statusOptions; track s) {
+        <option [value]="s">{{ statusLabels[s] }}</option>
+      }
+    </select>
+  </div>
+
+  <div class="tv-show-row__rating">
+    @if (show().rating !== undefined) {
+      <span class="tv-show-row__rating-star" aria-hidden="true">★</span>
+      <span class="tv-show-row__rating-value">{{ show().rating }}</span>
+      <span class="tv-show-row__rating-scale">/10</span>
+    } @else {
+      <span class="tv-show-row__rating-empty">—</span>
+    }
+  </div>
+
+  <div class="tv-show-row__actions">
+    <button
+      class="tv-show-row__btn tv-show-row__btn--rate"
+      type="button"
+      [attr.aria-label]="(show().rating !== undefined ? 'Edit rating for ' : 'Rate ') + show().title"
+      (click)="rateClick.emit(show())"
+    >
+      {{ show().rating !== undefined ? 'Edit' : 'Rate' }}
+    </button>
+    <button
+      class="tv-show-row__btn tv-show-row__btn--delete"
+      type="button"
+      [attr.aria-label]="'Delete ' + show().title"
+      (click)="deleteClick.emit(show())"
+    >
+      ✕
+    </button>
+  </div>
+</div>

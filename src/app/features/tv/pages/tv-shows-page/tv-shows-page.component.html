@@ -1,0 +1,54 @@
+<div class="tv-shows-page">
+  <header class="tv-shows-page__header">
+    <h1 class="tv-shows-page__title">TV Shows</h1>
+    <div class="tv-shows-page__controls">
+      <app-tv-shows-filter
+        [filters]="facade.filters()"
+        (filtersChange)="onFiltersChange($event)"
+      />
+      <button class="tv-shows-page__add-btn" type="button" (click)="openDrawer()">
+        + Add Show
+      </button>
+    </div>
+  </header>
+
+  <main class="tv-shows-page__content">
+    @if (facade.isLoading()) {
+      <div class="tv-shows-page__loading" aria-live="polite" aria-busy="true">
+        <div class="tv-shows-page__spinner" aria-hidden="true"></div>
+        <p>Loading shows…</p>
+      </div>
+    } @else if (facade.error()) {
+      <app-tv-shows-error [message]="facade.error()!" />
+    } @else {
+      <app-tv-shows-list
+        [shows]="facade.shows()"
+        [filtersApplied]="facade.hasActiveFilters()"
+        (statusChange)="onStatusChange($event)"
+        (rateClick)="openRateDialog($event)"
+        (deleteClick)="openDeleteDialog($event)"
+      />
+    }
+  </main>
+
+  <app-tv-shows-add-drawer
+    [isOpen]="isDrawerOpen()"
+    [isSaving]="facade.isSaving()"
+    (closed)="closeDrawer()"
+    (submitted)="onShowSubmit($event)"
+  />
+
+  <app-tv-shows-rate-dialog
+    [show]="ratingShow()"
+    [isSaving]="facade.isSaving()"
+    (closed)="closeRateDialog()"
+    (rated)="onShowRated($event)"
+  />
+
+  <app-tv-shows-delete-confirm-dialog
+    [show]="deletingShow()"
+    [isSaving]="facade.isSaving()"
+    (closed)="closeDeleteDialog()"
+    (confirmed)="onShowDelete()"
+  />
+</div>

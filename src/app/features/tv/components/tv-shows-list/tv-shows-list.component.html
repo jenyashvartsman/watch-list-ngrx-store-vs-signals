@@ -1,0 +1,18 @@
+<section class="tv-shows-list">
+  @if (shows().length === 0) {
+    <app-tv-shows-empty [filtersApplied]="filtersApplied()" />
+  } @else {
+    <ul class="tv-shows-list__items">
+      @for (show of shows(); track show.id) {
+        <li class="tv-shows-list__item">
+          <app-tv-show-row
+            [show]="show"
+            (statusChange)="statusChange.emit($event)"
+            (rateClick)="rateClick.emit($event)"
+            (deleteClick)="deleteClick.emit($event)"
+          />
+        </li>
+      }
+    </ul>
+  }
+</section>

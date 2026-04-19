@@ -1,0 +1,88 @@
+<ui-drawer title="Add TV Show" [isOpen]="isOpen()" (closed)="onClose()">
+  <form class="tv-shows-add-drawer__form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="tv-shows-add-drawer__field">
+      <label class="tv-shows-add-drawer__label" for="show-title">Title</label>
+      <input
+        class="tv-shows-add-drawer__input"
+        [class.tv-shows-add-drawer__input--error]="form.controls.title.invalid && form.controls.title.touched"
+        id="show-title"
+        type="text"
+        formControlName="title"
+        placeholder="Enter show title"
+        autocomplete="off"
+      />
+      @if (form.controls.title.invalid && form.controls.title.touched) {
+        <p class="tv-shows-add-drawer__error" role="alert">Title is required.</p>
+      }
+    </div>
+
+    <div class="tv-shows-add-drawer__field">
+      <label class="tv-shows-add-drawer__label" for="show-genre">Genre</label>
+      <select
+        class="tv-shows-add-drawer__select"
+        [class.tv-shows-add-drawer__select--error]="form.controls.genre.invalid && form.controls.genre.touched"
+        id="show-genre"
+        formControlName="genre"
+      >
+        <option value="" disabled>Select a genre</option>
+        @for (genre of genres; track genre.value) {
+          <option [value]="genre.value">{{ genre.label }}</option>
+        }
+      </select>
+      @if (form.controls.genre.invalid && form.controls.genre.touched) {
+        <p class="tv-shows-add-drawer__error" role="alert">Genre is required.</p>
+      }
+    </div>
+
+    <div class="tv-shows-add-drawer__field">
+      <label class="tv-shows-add-drawer__label" for="show-status">Status</label>
+      <select
+        class="tv-shows-add-drawer__select"
+        id="show-status"
+        formControlName="status"
+      >
+        @for (status of statuses; track status.value) {
+          <option [value]="status.value">{{ status.label }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="tv-shows-add-drawer__field">
+      <label class="tv-shows-add-drawer__label" for="show-thumbnail">Thumbnail URL</label>
+      <input
+        class="tv-shows-add-drawer__input"
+        [class.tv-shows-add-drawer__input--error]="form.controls.thumbnailUrl.invalid && form.controls.thumbnailUrl.touched"
+        id="show-thumbnail"
+        type="text"
+        formControlName="thumbnailUrl"
+        placeholder="https://example.com/poster.jpg"
+        autocomplete="off"
+      />
+      @if (form.controls.thumbnailUrl.invalid && form.controls.thumbnailUrl.touched) {
+        <p class="tv-shows-add-drawer__error" role="alert">Thumbnail URL is required.</p>
+      }
+    </div>
+
+    <footer class="tv-shows-add-drawer__footer">
+      <button
+        class="tv-shows-add-drawer__btn tv-shows-add-drawer__btn--cancel"
+        type="button"
+        (click)="onClose()"
+      >
+        Cancel
+      </button>
+      <button
+        class="tv-shows-add-drawer__btn tv-shows-add-drawer__btn--submit"
+        type="submit"
+        [disabled]="isSaving()"
+        [attr.aria-busy]="isSaving()"
+      >
+        @if (isSaving()) {
+          Saving…
+        } @else {
+          Add Show
+        }
+      </button>
+    </footer>
+  </form>
+</ui-drawer>

@@ -1,0 +1,116 @@
+:host {
+  --ui-accent: var(--color-tv);
+}
+
+.tv-shows-rate-dialog {
+  &__body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  &__show-title {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text-strong);
+    text-align: center;
+  }
+
+  &__score {
+    display: flex;
+    gap: 0.25rem;
+    block-size: 2.5rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__score-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-accent-strong);
+    line-height: 1;
+  }
+
+  &__score-scale {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+  }
+
+  &__score-empty {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  &__stars {
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  &__star {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.75rem;
+    line-height: 1;
+    color: var(--color-border-strong);
+    padding: 0.25rem;
+    transition:
+      color 0.1s,
+      transform 0.1s;
+
+    &--active {
+      color: var(--color-accent-strong);
+    }
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+
+  &__footer {
+    display: flex;
+    gap: var(--space-3);
+    justify-content: flex-end;
+  }
+
+  &__btn {
+    padding: 0.5rem var(--space-5);
+    border-radius: var(--radius-lg);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition:
+      background 0.15s,
+      color 0.15s,
+      filter 0.15s;
+
+    &--cancel {
+      background: transparent;
+      border-color: var(--color-border);
+      color: var(--color-text-muted);
+
+      &:hover {
+        background: var(--color-border);
+        color: var(--color-text-strong);
+      }
+    }
+
+    &--submit {
+      background: var(--color-tv);
+      color: var(--color-background);
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      &:not(:disabled):hover {
+        filter: brightness(1.1);
+      }
+    }
+  }
+}

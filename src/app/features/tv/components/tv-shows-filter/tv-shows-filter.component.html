@@ -1,0 +1,16 @@
+<div class="tv-shows-filter">
+  <ui-text-input
+    label="Search"
+    [value]="filters().title"
+    placeholder="Search shows…"
+    type="search"
+    (valueChange)="onTitleChange($event)"
+  />
+  <ui-select
+    label="Status"
+    [value]="filters().status"
+    [options]="statusOptions"
+    allOptionLabel="All statuses"
+    (valueChange)="onStatusChange($event)"
+  />
+</div>
