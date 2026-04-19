@@ -14,4 +14,5 @@ export class MoviesGridComponent {
   readonly movies = input.required<MovieDto[]>();
   readonly filtersApplied = input(false);
   readonly rateClick = output<MovieDto>();
+  readonly deleteClick = output<MovieDto>();
 }

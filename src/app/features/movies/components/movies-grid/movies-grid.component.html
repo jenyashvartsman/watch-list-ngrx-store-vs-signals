@@ -5,7 +5,11 @@
     <ul class="movies-grid__list">
       @for (movie of movies(); track movie.id) {
         <li class="movies-grid__item">
-          <app-movies-card [movie]="movie" (rateClick)="rateClick.emit($event)" />
+          <app-movies-card
+            [movie]="movie"
+            (rateClick)="rateClick.emit($event)"
+            (deleteClick)="deleteClick.emit($event)"
+          />
         </li>
       }
     </ul>

@@ -1,0 +1,34 @@
+<ui-dialog title="Delete Movie" [isOpen]="movie() !== null" (closed)="closed.emit()">
+  @if (movie(); as m) {
+    <div class="movies-delete-confirm-dialog__body">
+      <p class="movies-delete-confirm-dialog__message">
+        Are you sure you want to remove
+        <strong class="movies-delete-confirm-dialog__movie-title">{{ m.title }}</strong>
+        from your watch list?
+      </p>
+    </div>
+
+    <footer class="movies-delete-confirm-dialog__footer">
+      <button
+        class="movies-delete-confirm-dialog__btn movies-delete-confirm-dialog__btn--cancel"
+        type="button"
+        (click)="closed.emit()"
+      >
+        Cancel
+      </button>
+      <button
+        class="movies-delete-confirm-dialog__btn movies-delete-confirm-dialog__btn--delete"
+        type="button"
+        [disabled]="isSaving()"
+        [attr.aria-busy]="isSaving()"
+        (click)="confirmed.emit()"
+      >
+        @if (isSaving()) {
+          Deleting…
+        } @else {
+          Delete
+        }
+      </button>
+    </footer>
+  }
+</ui-dialog>

@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { MoviesAddDrawerComponent } from '../components/movies-add-drawer/movies-add-drawer.component';
+import { MoviesDeleteConfirmDialogComponent } from '../components/movies-delete-confirm-dialog/movies-delete-confirm-dialog.component';
 import { MoviesErrorComponent } from '../components/movies-error/movies-error.component';
 import { MoviesFilterComponent } from '../components/movies-filter/movies-filter.component';
 import { MoviesGridComponent } from '../components/movies-grid/movies-grid.component';
@@ -15,6 +16,7 @@ import { MoviesFilters, MoviesStore } from '../state/movies.store';
     MoviesErrorComponent,
     MoviesAddDrawerComponent,
     MoviesRateDialogComponent,
+    MoviesDeleteConfirmDialogComponent,
   ],
   templateUrl: './movies-page.component.html',
   styleUrl: './movies-page.component.scss',
@@ -24,6 +26,7 @@ export class MoviesPageComponent implements OnInit {
   readonly moviesStore = inject(MoviesStore);
   readonly isDrawerOpen = signal(false);
   readonly ratingMovie = signal<MovieDto | null>(null);
+  readonly deletingMovie = signal<MovieDto | null>(null);
 
   ngOnInit(): void {
     this.moviesStore.initialize();
@@ -62,6 +65,23 @@ export class MoviesPageComponent implements OnInit {
     await this.moviesStore.rateMovie(movie.id, rating);
     if (!this.moviesStore.error()) {
       this.ratingMovie.set(null);
+    }
+  }
+
+  openDeleteDialog(movie: MovieDto): void {
+    this.deletingMovie.set(movie);
+  }
+
+  closeDeleteDialog(): void {
+    this.deletingMovie.set(null);
+  }
+
+  async onMovieDelete(): Promise<void> {
+    const movie = this.deletingMovie();
+    if (!movie) return;
+    await this.moviesStore.deleteMovie(movie.id);
+    if (!this.moviesStore.error()) {
+      this.deletingMovie.set(null);
     }
   }
 }

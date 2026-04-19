@@ -26,14 +26,24 @@
         }
       </div>
 
-      <button
-        class="movies-card__rate-btn"
-        type="button"
-        [attr.aria-label]="(movie().rating !== undefined ? 'Edit rating for ' : 'Rate ') + movie().title"
-        (click)="rateClick.emit(movie())"
-      >
-        {{ movie().rating !== undefined ? 'Edit' : 'Rate' }}
-      </button>
+      <div class="movies-card__actions">
+        <button
+          class="movies-card__rate-btn"
+          type="button"
+          [attr.aria-label]="(movie().rating !== undefined ? 'Edit rating for ' : 'Rate ') + movie().title"
+          (click)="rateClick.emit(movie())"
+        >
+          {{ movie().rating !== undefined ? 'Edit' : 'Rate' }}
+        </button>
+        <button
+          class="movies-card__delete-btn"
+          type="button"
+          [attr.aria-label]="'Delete ' + movie().title"
+          (click)="deleteClick.emit(movie())"
+        >
+          ✕
+        </button>
+      </div>
     </div>
   </div>
 </article>

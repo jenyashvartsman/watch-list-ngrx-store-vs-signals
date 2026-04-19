@@ -10,4 +10,5 @@ import { MovieDto } from '../../data-access/dto/movie.dto';
 export class MoviesCardComponent {
   readonly movie = input.required<MovieDto>();
   readonly rateClick = output<MovieDto>();
+  readonly deleteClick = output<MovieDto>();
 }
