@@ -1,13 +1,16 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
-import { MoviesAddDrawerComponent } from '../components/movies-add-drawer/movies-add-drawer.component';
-import { MoviesDeleteConfirmDialogComponent } from '../components/movies-delete-confirm-dialog/movies-delete-confirm-dialog.component';
-import { MoviesErrorComponent } from '../components/movies-error/movies-error.component';
-import { MoviesFilterComponent } from '../components/movies-filter/movies-filter.component';
-import { MoviesGridComponent } from '../components/movies-grid/movies-grid.component';
-import { MoviesRateDialogComponent } from '../components/movies-rate-dialog/movies-rate-dialog.component';
-import { CreateMovieDto, MovieDto } from '../data-access/dto/movie.dto';
-import { MoviesFilters, MoviesStore } from '../state/movies.store';
-import { ImageLightboxComponent, LightboxImage } from '../../../shared/ui/image-lightbox/image-lightbox.component';
+import { MoviesAddDrawerComponent } from '../../components/movies-add-drawer/movies-add-drawer.component';
+import { MoviesDeleteConfirmDialogComponent } from '../../components/movies-delete-confirm-dialog/movies-delete-confirm-dialog.component';
+import { MoviesErrorComponent } from '../../components/movies-error/movies-error.component';
+import { MoviesFilterComponent } from '../../components/movies-filter/movies-filter.component';
+import { MoviesGridComponent } from '../../components/movies-grid/movies-grid.component';
+import { MoviesRateDialogComponent } from '../../components/movies-rate-dialog/movies-rate-dialog.component';
+import { CreateMovieDto, MovieDto } from '../../data-access/dto/movie.dto';
+import { MoviesFilters, MoviesStore } from '../../state/movies.store';
+import {
+  ImageLightboxComponent,
+  LightboxImage,
+} from '../../../../shared/ui/image-lightbox/image-lightbox.component';
 
 @Component({
   selector: 'app-movies-page',

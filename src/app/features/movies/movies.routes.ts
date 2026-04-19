@@ -4,6 +4,6 @@ export const moviesRoutes: Routes = [
   {
     path: '',
     loadComponent: () =>
-      import('./pages/movies-page.component').then((m) => m.MoviesPageComponent),
+      import('./pages/movies-page/movies-page.component').then((m) => m.MoviesPageComponent),
   },
 ];
