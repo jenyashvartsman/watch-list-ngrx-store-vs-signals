@@ -22,6 +22,16 @@
     background: var(--color-surface-strong);
   }
 
+  &__image-btn {
+    display: block;
+    inline-size: 100%;
+    block-size: 100%;
+    border: none;
+    padding: 0;
+    background: none;
+    cursor: zoom-in;
+  }
+
   &__image {
     inline-size: 100%;
     block-size: 100%;

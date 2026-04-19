@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
+import { ImageLightboxComponent, LightboxImage } from '../../../../shared/ui/image-lightbox/image-lightbox.component';
 import { TvShowDto } from '../../data-access/dto/tv-show.dto';
 import { TvShowsFacade } from '../../state/tv-shows.facade';
 import { TvShowsFilters } from '../../state/tv-shows.reducer';
@@ -19,6 +20,7 @@ import { CreateTvShowDto, TvShowStatus } from '../../data-access/dto/tv-show.dto
     TvShowsAddDrawerComponent,
     TvShowsRateDialogComponent,
     TvShowsDeleteConfirmDialogComponent,
+    ImageLightboxComponent,
   ],
   templateUrl: './tv-shows-page.component.html',
   styleUrl: './tv-shows-page.component.scss',
@@ -28,6 +30,7 @@ export class TvShowsPageComponent implements OnInit {
   readonly facade = inject(TvShowsFacade);
 
   readonly isDrawerOpen = signal(false);
+  readonly lightboxImage = signal<LightboxImage | null>(null);
   readonly ratingShow = signal<TvShowDto | null>(null);
   readonly deletingShow = signal<TvShowDto | null>(null);
 

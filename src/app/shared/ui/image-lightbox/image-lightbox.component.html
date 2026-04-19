@@ -1,0 +1,32 @@
+<div
+  class="image-lightbox"
+  [class.image-lightbox--open]="image() !== null"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Image preview"
+  (keydown.escape)="onClose()"
+>
+  <div class="image-lightbox__backdrop" (click)="onClose()" aria-hidden="true"></div>
+
+  @if (image(); as img) {
+    <div class="image-lightbox__content">
+      <button
+        class="image-lightbox__close"
+        type="button"
+        aria-label="Close image preview"
+        #closeBtn
+        (click)="onClose()"
+      >
+        &times;
+      </button>
+
+      <img
+        class="image-lightbox__image"
+        [src]="img.src"
+        [alt]="img.alt"
+      />
+
+      <p class="image-lightbox__caption">{{ img.alt }}</p>
+    </div>
+  }
+</div>

@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { LightboxImage } from '../../../../shared/ui/image-lightbox/image-lightbox.component';
 import { MovieDto } from '../../data-access/dto/movie.dto';
 import { MoviesCardComponent } from '../movies-card/movies-card.component';
 import { MoviesEmptyComponent } from '../movies-empty/movies-empty.component';
@@ -13,6 +14,7 @@ import { MoviesEmptyComponent } from '../movies-empty/movies-empty.component';
 export class MoviesGridComponent {
   readonly movies = input.required<MovieDto[]>();
   readonly filtersApplied = input(false);
+  readonly imageClick = output<LightboxImage>();
   readonly rateClick = output<MovieDto>();
   readonly deleteClick = output<MovieDto>();
 }

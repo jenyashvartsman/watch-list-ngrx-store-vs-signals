@@ -17,17 +17,27 @@
 
   &__thumbnail {
     flex-shrink: 0;
-    inline-size: 5rem;
-    block-size: 2.8rem;
+    inline-size: 7rem;
+    block-size: 4rem;
     border-radius: var(--radius-lg);
     overflow: hidden;
-    background: var(--color-surface-strong);
+  }
+
+  &__image-btn {
+    display: block;
+    inline-size: 100%;
+    block-size: 100%;
+    border: none;
+    padding: 0;
+    background: none;
+    cursor: zoom-in;
   }
 
   &__image {
     inline-size: 100%;
     block-size: 100%;
     object-fit: cover;
+    pointer-events: none;
   }
 
   &__info {

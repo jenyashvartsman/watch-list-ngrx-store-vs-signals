@@ -1,11 +1,18 @@
 <article class="movies-card">
   <div class="movies-card__poster">
-    <img
-      class="movies-card__image"
-      [src]="movie().thumbnailUrl"
-      [alt]="movie().title"
-      loading="lazy"
-    />
+    <button
+      class="movies-card__image-btn"
+      type="button"
+      [attr.aria-label]="'View image for ' + movie().title"
+      (click)="imageClick.emit({ src: movie().thumbnailUrl, alt: movie().title })"
+    >
+      <img
+        class="movies-card__image"
+        [src]="movie().thumbnailUrl"
+        [alt]="movie().title"
+        loading="lazy"
+      />
+    </button>
     <span class="movies-card__genre">{{ movie().genre }}</span>
   </div>
 

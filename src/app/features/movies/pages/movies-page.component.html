@@ -22,11 +22,14 @@
       <app-movies-grid
         [movies]="moviesStore.filteredMovies()"
         [filtersApplied]="moviesStore.hasActiveFilters()"
+        (imageClick)="lightboxImage.set($event)"
         (rateClick)="openRateDialog($event)"
         (deleteClick)="openDeleteDialog($event)"
       />
     }
   </main>
+
+  <ui-image-lightbox [image]="lightboxImage()" (closed)="lightboxImage.set(null)" />
 
   <app-movies-add-drawer
     [isOpen]="isDrawerOpen()"

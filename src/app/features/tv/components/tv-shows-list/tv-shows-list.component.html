@@ -7,6 +7,7 @@
         <li class="tv-shows-list__item">
           <app-tv-show-row
             [show]="show"
+            (imageClick)="imageClick.emit($event)"
             (statusChange)="statusChange.emit($event)"
             (rateClick)="rateClick.emit($event)"
             (deleteClick)="deleteClick.emit($event)"

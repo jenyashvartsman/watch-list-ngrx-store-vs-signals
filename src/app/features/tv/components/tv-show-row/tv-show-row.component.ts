@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { LightboxImage } from '../../../../shared/ui/image-lightbox/image-lightbox.component';
 import { TV_SHOW_STATUS_LABELS, TvShowDto, TvShowStatus } from '../../data-access/dto/tv-show.dto';
 
 @Component({
@@ -10,6 +11,7 @@ import { TV_SHOW_STATUS_LABELS, TvShowDto, TvShowStatus } from '../../data-acces
 export class TvShowRowComponent {
   readonly show = input.required<TvShowDto>();
 
+  readonly imageClick = output<LightboxImage>();
   readonly statusChange = output<{ id: string; status: TvShowStatus }>();
   readonly rateClick = output<TvShowDto>();
   readonly deleteClick = output<TvShowDto>();

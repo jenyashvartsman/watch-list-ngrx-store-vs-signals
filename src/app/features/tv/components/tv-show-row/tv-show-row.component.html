@@ -1,11 +1,18 @@
 <div class="tv-show-row">
   <div class="tv-show-row__thumbnail">
-    <img
-      class="tv-show-row__image"
-      [src]="show().thumbnailUrl"
-      [alt]="show().title"
-      loading="lazy"
-    />
+    <button
+      class="tv-show-row__image-btn"
+      type="button"
+      [attr.aria-label]="'View image for ' + show().title"
+      (click)="imageClick.emit({ src: show().thumbnailUrl, alt: show().title })"
+    >
+      <img
+        class="tv-show-row__image"
+        [src]="show().thumbnailUrl"
+        [alt]="show().title"
+        loading="lazy"
+      />
+    </button>
   </div>
 
   <div class="tv-show-row__info">

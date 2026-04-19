@@ -7,6 +7,7 @@
         <li class="movies-grid__item">
           <app-movies-card
             [movie]="movie"
+            (imageClick)="imageClick.emit($event)"
             (rateClick)="rateClick.emit($event)"
             (deleteClick)="deleteClick.emit($event)"
           />

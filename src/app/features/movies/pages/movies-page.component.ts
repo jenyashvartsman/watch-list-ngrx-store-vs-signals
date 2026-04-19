@@ -7,6 +7,7 @@ import { MoviesGridComponent } from '../components/movies-grid/movies-grid.compo
 import { MoviesRateDialogComponent } from '../components/movies-rate-dialog/movies-rate-dialog.component';
 import { CreateMovieDto, MovieDto } from '../data-access/dto/movie.dto';
 import { MoviesFilters, MoviesStore } from '../state/movies.store';
+import { ImageLightboxComponent, LightboxImage } from '../../../shared/ui/image-lightbox/image-lightbox.component';
 
 @Component({
   selector: 'app-movies-page',
@@ -17,6 +18,7 @@ import { MoviesFilters, MoviesStore } from '../state/movies.store';
     MoviesAddDrawerComponent,
     MoviesRateDialogComponent,
     MoviesDeleteConfirmDialogComponent,
+    ImageLightboxComponent,
   ],
   templateUrl: './movies-page.component.html',
   styleUrl: './movies-page.component.scss',
@@ -25,6 +27,7 @@ import { MoviesFilters, MoviesStore } from '../state/movies.store';
 export class MoviesPageComponent implements OnInit {
   readonly moviesStore = inject(MoviesStore);
   readonly isDrawerOpen = signal(false);
+  readonly lightboxImage = signal<LightboxImage | null>(null);
   readonly ratingMovie = signal<MovieDto | null>(null);
   readonly deletingMovie = signal<MovieDto | null>(null);
 
