@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
-import { MovieAddDrawerComponent } from '../components/movie-add-drawer/movie-add-drawer.component';
+import { MoviesAddDrawerComponent } from '../components/movies-add-drawer/movies-add-drawer.component';
 import { MoviesErrorComponent } from '../components/movies-error/movies-error.component';
 import { MoviesFilterComponent } from '../components/movies-filter/movies-filter.component';
 import { MoviesGridComponent } from '../components/movies-grid/movies-grid.component';
@@ -13,7 +13,7 @@ import { MoviesFilters, MoviesStore } from '../state/movies.store';
     MoviesFilterComponent,
     MoviesGridComponent,
     MoviesErrorComponent,
-    MovieAddDrawerComponent,
+    MoviesAddDrawerComponent,
     MoviesRateDialogComponent,
   ],
   templateUrl: './movies-page.component.html',

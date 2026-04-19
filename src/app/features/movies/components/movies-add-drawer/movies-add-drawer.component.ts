@@ -16,13 +16,13 @@ const GENRES: SelectOption[] = [
 ];
 
 @Component({
-  selector: 'app-movie-add-drawer',
+  selector: 'app-movies-add-drawer',
   imports: [ReactiveFormsModule, DrawerComponent],
-  templateUrl: './movie-add-drawer.component.html',
-  styleUrl: './movie-add-drawer.component.scss',
+  templateUrl: './movies-add-drawer.component.html',
+  styleUrl: './movies-add-drawer.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MovieAddDrawerComponent {
+export class MoviesAddDrawerComponent {
   readonly isOpen = input(false);
   readonly isSaving = input(false);
 
