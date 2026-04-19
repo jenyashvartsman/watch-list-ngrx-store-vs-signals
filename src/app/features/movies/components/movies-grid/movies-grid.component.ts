@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { MovieDto } from '../../data-access/dto/movie.dto';
 import { MoviesCardComponent } from '../movies-card/movies-card.component';
 import { MoviesEmptyComponent } from '../movies-empty/movies-empty.component';
@@ -13,4 +13,5 @@ import { MoviesEmptyComponent } from '../movies-empty/movies-empty.component';
 export class MoviesGridComponent {
   readonly movies = input.required<MovieDto[]>();
   readonly filtersApplied = input(false);
+  readonly rateClick = output<MovieDto>();
 }

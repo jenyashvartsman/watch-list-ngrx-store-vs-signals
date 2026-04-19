@@ -3,12 +3,19 @@ import { MovieAddDrawerComponent } from '../components/movie-add-drawer/movie-ad
 import { MoviesErrorComponent } from '../components/movies-error/movies-error.component';
 import { MoviesFilterComponent } from '../components/movies-filter/movies-filter.component';
 import { MoviesGridComponent } from '../components/movies-grid/movies-grid.component';
-import { CreateMovieDto } from '../data-access/dto/movie.dto';
+import { MoviesRateDialogComponent } from '../components/movies-rate-dialog/movies-rate-dialog.component';
+import { CreateMovieDto, MovieDto } from '../data-access/dto/movie.dto';
 import { MoviesFilters, MoviesStore } from '../state/movies.store';
 
 @Component({
   selector: 'app-movies-page',
-  imports: [MoviesFilterComponent, MoviesGridComponent, MoviesErrorComponent, MovieAddDrawerComponent],
+  imports: [
+    MoviesFilterComponent,
+    MoviesGridComponent,
+    MoviesErrorComponent,
+    MovieAddDrawerComponent,
+    MoviesRateDialogComponent,
+  ],
   templateUrl: './movies-page.component.html',
   styleUrl: './movies-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -16,6 +23,7 @@ import { MoviesFilters, MoviesStore } from '../state/movies.store';
 export class MoviesPageComponent implements OnInit {
   readonly moviesStore = inject(MoviesStore);
   readonly isDrawerOpen = signal(false);
+  readonly ratingMovie = signal<MovieDto | null>(null);
 
   ngOnInit(): void {
     this.moviesStore.initialize();
@@ -37,6 +45,23 @@ export class MoviesPageComponent implements OnInit {
     await this.moviesStore.addMovie(payload);
     if (!this.moviesStore.error()) {
       this.isDrawerOpen.set(false);
+    }
+  }
+
+  openRateDialog(movie: MovieDto): void {
+    this.ratingMovie.set(movie);
+  }
+
+  closeRateDialog(): void {
+    this.ratingMovie.set(null);
+  }
+
+  async onMovieRated(rating: number): Promise<void> {
+    const movie = this.ratingMovie();
+    if (!movie) return;
+    await this.moviesStore.rateMovie(movie.id, rating);
+    if (!this.moviesStore.error()) {
+      this.ratingMovie.set(null);
     }
   }
 }

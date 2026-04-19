@@ -22,6 +22,7 @@
       <app-movies-grid
         [movies]="moviesStore.filteredMovies()"
         [filtersApplied]="moviesStore.hasActiveFilters()"
+        (rateClick)="openRateDialog($event)"
       />
     }
   </main>
@@ -31,5 +32,12 @@
     [isSaving]="moviesStore.isSaving()"
     (closed)="closeDrawer()"
     (submitted)="onMovieSubmit($event)"
+  />
+
+  <app-movies-rate-dialog
+    [movie]="ratingMovie()"
+    [isSaving]="moviesStore.isSaving()"
+    (closed)="closeRateDialog()"
+    (rated)="onMovieRated($event)"
   />
 </div>

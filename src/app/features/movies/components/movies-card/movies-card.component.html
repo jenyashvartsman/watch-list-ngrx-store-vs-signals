@@ -12,17 +12,28 @@
   <div class="movies-card__body">
     <h3 class="movies-card__title">{{ movie().title }}</h3>
 
-    <div
-      class="movies-card__rating"
-      [class.movies-card__rating--unrated]="movie().rating === undefined"
-    >
-      @if (movie().rating !== undefined) {
-        <span class="movies-card__rating-star" aria-hidden="true">★</span>
-        <span class="movies-card__rating-value">{{ movie().rating }}</span>
-        <span class="movies-card__rating-scale">/10</span>
-      } @else {
-        <span class="movies-card__rating-empty">Not rated</span>
-      }
+    <div class="movies-card__footer">
+      <div
+        class="movies-card__rating"
+        [class.movies-card__rating--unrated]="movie().rating === undefined"
+      >
+        @if (movie().rating !== undefined) {
+          <span class="movies-card__rating-star" aria-hidden="true">★</span>
+          <span class="movies-card__rating-value">{{ movie().rating }}</span>
+          <span class="movies-card__rating-scale">/10</span>
+        } @else {
+          <span class="movies-card__rating-empty">Not rated</span>
+        }
+      </div>
+
+      <button
+        class="movies-card__rate-btn"
+        type="button"
+        [attr.aria-label]="(movie().rating !== undefined ? 'Edit rating for ' : 'Rate ') + movie().title"
+        (click)="rateClick.emit(movie())"
+      >
+        {{ movie().rating !== undefined ? 'Edit' : 'Rate' }}
+      </button>
     </div>
   </div>
 </article>
