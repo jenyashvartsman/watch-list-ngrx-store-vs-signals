@@ -1,0 +1,26 @@
+<div
+  class="dialog"
+  [class.dialog--open]="isOpen()"
+  role="dialog"
+  aria-modal="true"
+  [attr.aria-labelledby]="titleId"
+  (keydown.escape)="onClose()"
+>
+  <div class="dialog__backdrop" (click)="onClose()" aria-hidden="true"></div>
+
+  <div class="dialog__panel" #panel tabindex="-1">
+    <header class="dialog__header">
+      <h2 class="dialog__title" [id]="titleId">{{ title() }}</h2>
+      <button
+        class="dialog__close"
+        type="button"
+        (click)="onClose()"
+        aria-label="Close dialog"
+      >
+        &times;
+      </button>
+    </header>
+
+    <ng-content />
+  </div>
+</div>

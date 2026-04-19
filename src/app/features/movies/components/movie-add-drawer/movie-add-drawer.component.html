@@ -1,98 +1,75 @@
-<div
-  class="movie-add-drawer"
-  [class.movie-add-drawer--open]="isOpen()"
-  role="dialog"
-  aria-modal="true"
-  aria-labelledby="drawer-title"
-  (keydown.escape)="onClose()"
->
-  <div class="movie-add-drawer__backdrop" (click)="onClose()" aria-hidden="true"></div>
+<ui-drawer title="Add Movie" [isOpen]="isOpen()" (closed)="onClose()">
+  <form class="movie-add-drawer__form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="movie-add-drawer__field">
+      <label class="movie-add-drawer__label" for="movie-title">Title</label>
+      <input
+        class="movie-add-drawer__input"
+        [class.movie-add-drawer__input--error]="form.controls.title.invalid && form.controls.title.touched"
+        id="movie-title"
+        type="text"
+        formControlName="title"
+        placeholder="Enter movie title"
+        autocomplete="off"
+      />
+      @if (form.controls.title.invalid && form.controls.title.touched) {
+        <p class="movie-add-drawer__error" role="alert">Title is required.</p>
+      }
+    </div>
 
-  <aside class="movie-add-drawer__panel" #panel tabindex="-1">
-    <header class="movie-add-drawer__header">
-      <h2 class="movie-add-drawer__title" id="drawer-title">Add Movie</h2>
+    <div class="movie-add-drawer__field">
+      <label class="movie-add-drawer__label" for="movie-genre">Genre</label>
+      <select
+        class="movie-add-drawer__select"
+        [class.movie-add-drawer__select--error]="form.controls.genre.invalid && form.controls.genre.touched"
+        id="movie-genre"
+        formControlName="genre"
+      >
+        <option value="" disabled>Select a genre</option>
+        @for (genre of genres; track genre.value) {
+          <option [value]="genre.value">{{ genre.label }}</option>
+        }
+      </select>
+      @if (form.controls.genre.invalid && form.controls.genre.touched) {
+        <p class="movie-add-drawer__error" role="alert">Genre is required.</p>
+      }
+    </div>
+
+    <div class="movie-add-drawer__field">
+      <label class="movie-add-drawer__label" for="movie-thumbnail">Thumbnail URL</label>
+      <input
+        class="movie-add-drawer__input"
+        [class.movie-add-drawer__input--error]="form.controls.thumbnailUrl.invalid && form.controls.thumbnailUrl.touched"
+        id="movie-thumbnail"
+        type="text"
+        formControlName="thumbnailUrl"
+        placeholder="https://example.com/poster.jpg"
+        autocomplete="off"
+      />
+      @if (form.controls.thumbnailUrl.invalid && form.controls.thumbnailUrl.touched) {
+        <p class="movie-add-drawer__error" role="alert">Thumbnail URL is required.</p>
+      }
+    </div>
+
+    <footer class="movie-add-drawer__footer">
       <button
-        class="movie-add-drawer__close"
+        class="movie-add-drawer__btn movie-add-drawer__btn--cancel"
         type="button"
         (click)="onClose()"
-        aria-label="Close drawer"
       >
-        &times;
+        Cancel
       </button>
-    </header>
-
-    <form class="movie-add-drawer__form" [formGroup]="form" (ngSubmit)="onSubmit()">
-      <div class="movie-add-drawer__field">
-        <label class="movie-add-drawer__label" for="movie-title">Title</label>
-        <input
-          class="movie-add-drawer__input"
-          [class.movie-add-drawer__input--error]="form.controls.title.invalid && form.controls.title.touched"
-          id="movie-title"
-          type="text"
-          formControlName="title"
-          placeholder="Enter movie title"
-          autocomplete="off"
-        />
-        @if (form.controls.title.invalid && form.controls.title.touched) {
-          <p class="movie-add-drawer__error" role="alert">Title is required.</p>
+      <button
+        class="movie-add-drawer__btn movie-add-drawer__btn--submit"
+        type="submit"
+        [disabled]="isSaving()"
+        [attr.aria-busy]="isSaving()"
+      >
+        @if (isSaving()) {
+          Saving…
+        } @else {
+          Add Movie
         }
-      </div>
-
-      <div class="movie-add-drawer__field">
-        <label class="movie-add-drawer__label" for="movie-genre">Genre</label>
-        <select
-          class="movie-add-drawer__select"
-          [class.movie-add-drawer__select--error]="form.controls.genre.invalid && form.controls.genre.touched"
-          id="movie-genre"
-          formControlName="genre"
-        >
-          <option value="" disabled>Select a genre</option>
-          @for (genre of genres; track genre.value) {
-            <option [value]="genre.value">{{ genre.label }}</option>
-          }
-        </select>
-        @if (form.controls.genre.invalid && form.controls.genre.touched) {
-          <p class="movie-add-drawer__error" role="alert">Genre is required.</p>
-        }
-      </div>
-
-      <div class="movie-add-drawer__field">
-        <label class="movie-add-drawer__label" for="movie-thumbnail">Thumbnail URL</label>
-        <input
-          class="movie-add-drawer__input"
-          [class.movie-add-drawer__input--error]="form.controls.thumbnailUrl.invalid && form.controls.thumbnailUrl.touched"
-          id="movie-thumbnail"
-          type="text"
-          formControlName="thumbnailUrl"
-          placeholder="https://example.com/poster.jpg"
-          autocomplete="off"
-        />
-        @if (form.controls.thumbnailUrl.invalid && form.controls.thumbnailUrl.touched) {
-          <p class="movie-add-drawer__error" role="alert">Thumbnail URL is required.</p>
-        }
-      </div>
-
-      <footer class="movie-add-drawer__footer">
-        <button
-          class="movie-add-drawer__btn movie-add-drawer__btn--cancel"
-          type="button"
-          (click)="onClose()"
-        >
-          Cancel
-        </button>
-        <button
-          class="movie-add-drawer__btn movie-add-drawer__btn--submit"
-          type="submit"
-          [disabled]="isSaving()"
-          [attr.aria-busy]="isSaving()"
-        >
-          @if (isSaving()) {
-            Saving…
-          } @else {
-            Add Movie
-          }
-        </button>
-      </footer>
-    </form>
-  </aside>
-</div>
+      </button>
+    </footer>
+  </form>
+</ui-drawer>

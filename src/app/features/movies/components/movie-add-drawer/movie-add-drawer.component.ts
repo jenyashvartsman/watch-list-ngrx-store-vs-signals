@@ -1,14 +1,6 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  effect,
-  ElementRef,
-  inject,
-  input,
-  output,
-  viewChild,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject, input, output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { DrawerComponent } from '../../../../shared/ui/drawer/drawer.component';
 import { SelectOption } from '../../../../shared/ui/select/select.component';
 import { CreateMovieDto, MovieGenre } from '../../data-access/dto/movie.dto';
 
@@ -25,7 +17,7 @@ const GENRES: SelectOption[] = [
 
 @Component({
   selector: 'app-movie-add-drawer',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, DrawerComponent],
   templateUrl: './movie-add-drawer.component.html',
   styleUrl: './movie-add-drawer.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -39,7 +31,6 @@ export class MovieAddDrawerComponent {
 
   readonly genres = GENRES;
 
-  private readonly panelRef = viewChild<ElementRef<HTMLElement>>('panel');
   private readonly fb = inject(FormBuilder);
 
   readonly form = this.fb.nonNullable.group({
@@ -50,9 +41,7 @@ export class MovieAddDrawerComponent {
 
   constructor() {
     effect(() => {
-      if (this.isOpen()) {
-        this.panelRef()?.nativeElement.focus();
-      } else {
+      if (!this.isOpen()) {
         this.form.reset();
       }
     });

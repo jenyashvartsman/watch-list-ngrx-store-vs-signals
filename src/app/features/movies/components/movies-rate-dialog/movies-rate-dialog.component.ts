@@ -3,16 +3,16 @@ import {
   Component,
   computed,
   effect,
-  ElementRef,
   input,
   output,
   signal,
-  viewChild,
 } from '@angular/core';
+import { DialogComponent } from '../../../../shared/ui/dialog/dialog.component';
 import { MovieDto } from '../../data-access/dto/movie.dto';
 
 @Component({
   selector: 'app-movies-rate-dialog',
+  imports: [DialogComponent],
   templateUrl: './movies-rate-dialog.component.html',
   styleUrl: './movies-rate-dialog.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -26,7 +26,6 @@ export class MoviesRateDialogComponent {
 
   readonly stars = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-  private readonly panelRef = viewChild<ElementRef<HTMLElement>>('panel');
   private readonly hoveredRating = signal(0);
   readonly selectedRating = signal(0);
 
@@ -37,7 +36,6 @@ export class MoviesRateDialogComponent {
       const movie = this.movie();
       if (movie) {
         this.selectedRating.set(movie.rating ?? 0);
-        this.panelRef()?.nativeElement.focus();
       }
     });
   }

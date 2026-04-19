@@ -1,83 +1,60 @@
-<div
-  class="movies-rate-dialog"
-  [class.movies-rate-dialog--open]="movie() !== null"
-  role="dialog"
-  aria-modal="true"
-  aria-labelledby="rate-dialog-title"
-  (keydown.escape)="onClose()"
->
-  <div class="movies-rate-dialog__backdrop" (click)="onClose()" aria-hidden="true"></div>
+<ui-dialog title="Rate Movie" [isOpen]="movie() !== null" (closed)="onClose()">
+  @if (movie(); as m) {
+    <div class="movies-rate-dialog__body">
+      <p class="movies-rate-dialog__movie-title">{{ m.title }}</p>
 
-  <div class="movies-rate-dialog__panel" #panel tabindex="-1">
-    <header class="movies-rate-dialog__header">
-      <h2 class="movies-rate-dialog__title" id="rate-dialog-title">Rate Movie</h2>
-      <button
-        class="movies-rate-dialog__close"
-        type="button"
-        (click)="onClose()"
-        aria-label="Close dialog"
-      >
-        &times;
-      </button>
-    </header>
-
-    @if (movie(); as m) {
-      <div class="movies-rate-dialog__body">
-        <p class="movies-rate-dialog__movie-title">{{ m.title }}</p>
-
-        <div class="movies-rate-dialog__score">
-          @if (displayRating() > 0) {
-            <span class="movies-rate-dialog__score-value">{{ displayRating() }}</span>
-            <span class="movies-rate-dialog__score-scale">/10</span>
-          } @else {
-            <span class="movies-rate-dialog__score-empty">Pick a rating</span>
-          }
-        </div>
-
-        <div
-          class="movies-rate-dialog__stars"
-          role="group"
-          aria-label="Rating"
-          (mouseleave)="onStarsLeave()"
-        >
-          @for (n of stars; track n) {
-            <button
-              class="movies-rate-dialog__star"
-              [class.movies-rate-dialog__star--active]="n <= displayRating()"
-              type="button"
-              [attr.aria-label]="'Rate ' + n + ' out of 10'"
-              [attr.aria-pressed]="n === selectedRating()"
-              (mouseenter)="onStarHover(n)"
-              (click)="onStarClick(n)"
-            >
-              ★
-            </button>
-          }
-        </div>
+      <div class="movies-rate-dialog__score">
+        @if (displayRating() > 0) {
+          <span class="movies-rate-dialog__score-value">{{ displayRating() }}</span>
+          <span class="movies-rate-dialog__score-scale">/10</span>
+        } @else {
+          <span class="movies-rate-dialog__score-empty">Pick a rating</span>
+        }
       </div>
 
-      <footer class="movies-rate-dialog__footer">
-        <button
-          class="movies-rate-dialog__btn movies-rate-dialog__btn--cancel"
-          type="button"
-          (click)="onClose()"
-        >
-          Cancel
-        </button>
-        <button
-          class="movies-rate-dialog__btn movies-rate-dialog__btn--submit"
-          type="button"
-          [disabled]="isSaving() || selectedRating() === 0"
-          [attr.aria-busy]="isSaving()"
-          (click)="onSubmit()"
-        >
-          @if (isSaving()) {
-            Saving…
-          } @else {
-            Save Rating
-          }
-        </button>
-      </footer>
-    }
-  </div>
-</div>
+      <div
+        class="movies-rate-dialog__stars"
+        role="group"
+        aria-label="Rating"
+        (mouseleave)="onStarsLeave()"
+      >
+        @for (n of stars; track n) {
+          <button
+            class="movies-rate-dialog__star"
+            [class.movies-rate-dialog__star--active]="n <= displayRating()"
+            type="button"
+            [attr.aria-label]="'Rate ' + n + ' out of 10'"
+            [attr.aria-pressed]="n === selectedRating()"
+            (mouseenter)="onStarHover(n)"
+            (click)="onStarClick(n)"
+          >
+            ★
+          </button>
+        }
+      </div>
+    </div>
+
+    <footer class="movies-rate-dialog__footer">
+      <button
+        class="movies-rate-dialog__btn movies-rate-dialog__btn--cancel"
+        type="button"
+        (click)="onClose()"
+      >
+        Cancel
+      </button>
+      <button
+        class="movies-rate-dialog__btn movies-rate-dialog__btn--submit"
+        type="button"
+        [disabled]="isSaving() || selectedRating() === 0"
+        [attr.aria-busy]="isSaving()"
+        (click)="onSubmit()"
+      >
+        @if (isSaving()) {
+          Saving…
+        } @else {
+          Save Rating
+        }
+      </button>
+    </footer>
+  }
+</ui-dialog>
